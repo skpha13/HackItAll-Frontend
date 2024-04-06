@@ -1,13 +1,18 @@
 <template>
-  <div class="p-2 rounded border-2 flex flex-col justify-center items-center">
-    <h2 class="text-center font-semibold text-xl">{{name}}</h2>
-    <ul class="w-full p-4 min-w-80" v-if="batteryList2.length > 0">
-      <Battery class="mb-2 p-4 " 
-        v-for="(battery, index) in batteryList2"
-        :battery="battery"
-        :index="index"/>
-    </ul>
-  </div>
+  <div class="w-full p-4 rounded-lg border-2 border-gray-300 shadow-md max-w-sm min-w-fit mb-4 ">
+  <h2 class="text-lg font-semibold mb-4 text-center">{{ name }}</h2>
+  <ul class="w-full space-y-4 min-w-72" v-if="batteryList2.length > 0">
+    <Battery
+      class="w-full bg-white rounded-lg shadow-md p-4"
+      v-for="(battery, index) in batteryList2"
+      :key="index"
+      :battery="battery"
+      @openModal = "openModal"
+    />
+  </ul>
+  
+</div>
+
 </template>
 
 <script setup>
@@ -44,6 +49,14 @@ const batteryList2 = ref([
   },
 ]);
 const name = "Station 1";
+const modalOpen = ref(false);
+const openModal = (index) => {
+  console.log(index);
+  modalOpen.value = true; 
+}
+const closeModal = () => {
+  modalOpen.value = false;
+};
 </script>
 
 

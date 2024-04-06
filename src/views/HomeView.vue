@@ -6,9 +6,9 @@ import Station from "@/components/Station.vue";
 const stations =
 
 <template>
-  <div class="flex flex-col-reverse md:flex-row md:h-full md:max-h-screen">
+  <div class="flex flex-col-reverse md:flex-row md:h-full md:max-h-screen ">
     <div class="flex flex-row flex-wrap
-                w-full md:w-3/4 md:max-h-fit md:overflow-y-scroll">
+                w-full md:w-3/4 md:max-h-fit md:overflow-y-scroll ">
         <Station />
         <Station />
         <Station />
