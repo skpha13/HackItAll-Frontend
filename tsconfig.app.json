@@ -1,6 +1,14 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue",
+              "src/models/*.ts",
+              "src/models/*.ts",
+              "src/models/**/*.ts",
+              "src/helpers/**/*.ts",
+              "src/helpers/AxiosIntance.ts",
+              "src/models/Generic.ts",
+              "src/models/Car.ts"
+  ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,

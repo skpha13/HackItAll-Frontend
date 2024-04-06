@@ -2,26 +2,32 @@
 import { RouterView } from 'vue-router'
 import DropdownCarBrand from "@/components/DropdownCarBrand.vue";
 import {ref} from "vue";
+import {Car} from "@/models/Car";
 
-const marcaMasina = [
-    "audi",
-    "bmw",
-    "renault",
-    "dacia"
-]
+// ============ FETCH ALL BRANDS ============
+const brands = ref();
+const areCarsLoaded = ref(false)
+const carWorker = new Car();
+const fetchAllBrands = async () => {
+  brands.value = await carWorker.getAllBrands();
+  brands.value = brands.value.map(obj => obj.brand);
+  areCarsLoaded.value = true;
+}
 
-const brandMarcaMasina = [
-  "Q4",
-  "Etron",
-  "TT",
-  "RS"
-]
+fetchAllBrands();
+// ==========================================
 
 const brand = ref("");
 const model = ref("");
+const models = ref();
+const areModelsLoaded = ref(false);
 const getCarsFromBrand = async (carBrand: string) => {
   brand.value = carBrand;
-//   TODO: Fetch cars from brand
+
+  models.value = await carWorker.getAllModelsFromBrand(carBrand);
+  models.value = models.value.map(obj => obj.model);
+
+  areModelsLoaded.value = true;
 }
 
 const setModel = (carModel: string) => {
@@ -37,12 +43,14 @@ const submitSearch = async () => {
 <template>
   <div class="flex flex-row justify-center items-center
               border border-purple-500 rounded-full p-2">
-    <DropdownCarBrand @has-chosen-brand="carBrand => getCarsFromBrand(carBrand)"
-                      :car-brands="marcaMasina"
+    <DropdownCarBrand @has-chosen-brand="brand => getCarsFromBrand(brand)"
+                      v-if="areCarsLoaded"
+                      :car-brands="brands"
                       button-label="Brands"
                       class="mr-5" />
 
-    <DropdownCarBrand :car-brands="brandMarcaMasina"
+    <DropdownCarBrand :car-brands="models"
+                      v-if="areModelsLoaded || !areModelsLoaded"
                       @has-chosen-brand="car => setModel(car)"
                       button-label="Models"
                       class="mr-5"
