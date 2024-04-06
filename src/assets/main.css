@@ -1,0 +1,11 @@
+@import './base.css';
+
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+}
