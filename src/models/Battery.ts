@@ -5,7 +5,10 @@ export class BatteryModel extends Generic {
 }
 
 export interface IBatteryInitial {
-    model: string,
+    model: {
+        id: string,
+        name: string
+    }
     maxCapacity: number,
     capacity: number,
     state: number,

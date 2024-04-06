@@ -2,7 +2,7 @@
     <div class="max-w-sm overflow-hidden shadow-lg rounded-md p-2 cursor-pointer min-w-64">
       <div>
         <div class="text-lg font-bold">
-            <span>Model: {{ props.battery.model }}</span>
+            <span>Model: {{ props.battery.model.name }}</span>
         </div>
         <div class="text-neutral-500 mb-2">
             <span> Capacity: {{ props.battery.capacity }} kWh</span>
