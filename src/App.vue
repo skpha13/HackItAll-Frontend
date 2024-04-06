@@ -46,7 +46,7 @@ import 'vue-map-ui/dist/theme-all.css';
 
 <template>
   <div class="flex flex-row justify-center items-center
-              border border-purple-500 rounded-full p-2">
+              border border-purple-500 rounded-full p-2 mb-1 z-[100] relative">
     <DropdownCarBrand @has-chosen-brand="brand => getCarsFromBrand(brand)"
                       v-if="areCarsLoaded"
                       :car-brands="brands"

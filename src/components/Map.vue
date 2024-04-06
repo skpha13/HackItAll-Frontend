@@ -1,5 +1,5 @@
 <template>
-  <div id="map" style="height: 500px; width: 90%"></div>
+  <div id="map" class="w-full h-96 md:h-screen" ></div>
 </template>
 
 <script setup>
@@ -47,9 +47,4 @@ onMounted(() => {
 </script>
 
 <style>
-
-#map {
-  height: 500px;
-  width: 90%;
-}
 </style>
