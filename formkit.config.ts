@@ -1,8 +1,9 @@
 // formkit.config.ts
-import { defineFormKitConfig } from '@formkit/vue'
+import { defineFormKitConfig, defaultConfig } from '@formkit/vue'
 import { rootClasses } from './formkit.theme.ts'
  
-export default defineFormKitConfig({
+export default defaultConfig({
+  locale: 'en',
   config: {
     rootClasses
   }

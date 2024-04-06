@@ -5,6 +5,7 @@ import {BatteryModel, type IBatteryInitial} from "@/models/Battery";
 import Battery from "@/components/Battery.vue";
 import {store} from "@/utils/store";
 import Station from "@/components/Station.vue";
+import BookForm from '@/components/BookForm.vue';
 
 // ============= FETCH ALL BATTERIES =============
 const batteries = ref<IBatteryInitial>();
@@ -21,9 +22,10 @@ fetchInitialBatteries()
 
 const openModal = ref(false);
 const idModel = ref("")
+
 const openPopup = async (id: string) => {
-  idModel.value = id;
   openModal.value = true;
+  idModel.value = id;
 }
 </script>
 
@@ -40,4 +42,9 @@ const openPopup = async (id: string) => {
     </div>
     <MapComp class="rounded-lg my-4 z-10"></MapComp>
   </div>
+  <div v-if="openModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg shadow-xl">
+        <BookForm :id="idModel" @clicked-close="openModal = false" />
+      </div>
+    </div>
 </template>
