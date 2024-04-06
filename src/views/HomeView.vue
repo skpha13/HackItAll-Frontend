@@ -1,19 +1,35 @@
 <script setup lang="ts">
 import MapComp from '@/components/Map.vue'
+import {ref} from "vue";
+import {BatteryModel, type IBatteryInitial} from "@/models/Battery";
+import Battery from "@/components/Battery.vue";
+import {store} from "@/utils/store";
 import Station from "@/components/Station.vue";
+
+// ============= FETCH ALL BATTERIES =============
+const batteries = ref<IBatteryInitial>();
+const batteryWorker = new BatteryModel();
+const areBatteriesLoaded = ref(false);
+
+const fetchInitialBatteries = async () => {
+  batteries.value = await batteryWorker.all();
+  areBatteriesLoaded.value = true;
+}
+
+fetchInitialBatteries()
+// ===============================================
 </script>
-
-const stations =
-
 <template>
   <div class="flex flex-col-reverse md:flex-row md:h-full md:max-h-screen">
-    <div class="flex flex-row flex-wrap
-                w-full md:w-3/4 md:max-h-fit md:overflow-y-scroll">
-        <Station />
-        <Station />
-        <Station />
+    <div v-if="!store.isFiltered"
+         class="flex flex-row flex-wrap
+         w-full md:w-3/4 md:max-h-fit md:overflow-y-scroll">
+        <Battery v-for="battery in batteries" :battery="battery" />
     </div>
-
+    <div v-else class="flex flex-row flex-wrap
+                w-full md:w-3/4 md:max-h-fit md:overflow-y-scroll">
+        <Station v-for="station in store.stations" :battery-list="station.batteries" :name="station.address" />
+    </div>
     <MapComp class="rounded-lg my-4 z-10"></MapComp>
   </div>
 </template>

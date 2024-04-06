@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import DropdownCarBrand from "@/components/DropdownCarBrand.vue";
 import {ref} from "vue";
 import {Car} from "@/models/Car";
+import {store} from "@/utils/store";
 
 // ============ FETCH ALL BRANDS ============
 const brands = ref();
@@ -34,14 +35,19 @@ const setModel = (carModel: string) => {
   model.value = carModel;
 }
 
+const stationWorker = new StationModel();
 const submitSearch = async () => {
-  console.log(brand.value, model.value);
+  store.brand = brand.value;
+  store.model = model.value;
+  store.isFiltered = true;
+  store.stations = await stationWorker.all(`?brand=${store.brand},model=${store.model}`)
 }
 
 import 'leaflet/dist/leaflet.css';
 import 'vue-map-ui/dist/normalize.css';
 import 'vue-map-ui/dist/style.css';
 import 'vue-map-ui/dist/theme-all.css';
+import {StationModel} from "@/models/Station";
 </script>
 
 <template>

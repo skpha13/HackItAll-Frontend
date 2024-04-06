@@ -7,7 +7,11 @@
               "src/helpers/**/*.ts",
               "src/helpers/AxiosIntance.ts",
               "src/models/Generic.ts",
-              "src/models/Car.ts"
+              "src/models/Car.ts",
+              "src/models/Battery.ts",
+              "src/utils/*.ts",
+              "src/utils/*.ts",
+              "src/utils/**/*.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

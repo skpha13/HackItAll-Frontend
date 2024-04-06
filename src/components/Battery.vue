@@ -1,40 +1,35 @@
 <template>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg rounded-md p-2 cursor-pointer flex flex-row justify-between items-center">
+    <div class="max-w-sm overflow-hidden shadow-lg rounded-md p-2 cursor-pointer min-w-64">
       <div>
-        <div class="">
-            <span>Model: {{ battery.model }}</span>
+        <div class="text-lg font-bold">
+            <span>Model: {{ props.battery.model }}</span>
         </div>
-        <div class="">
-            <span> Capacity: {{ battery.capacity }} kWh</span>
+        <div class="text-neutral-500 mb-2">
+            <span> Capacity: {{ props.battery.capacity }} kWh</span>
         </div>
-        <div class="">
-            <div class="bg-gray-200 rounded-full dark:bg-gray-700">
-                <div class="bg-green-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" :style="{ width: `${battery.procent}%` }"> {{battery.procent}}%</div>
+        <div class="text-neutral-500 mb-2">
+          <span>Status: {{ GetBatteryState(props.battery.state) }}</span>
+        </div>
+        <div class="mb-2">
+            <div class="bg-gray-200 rounded-full">
+                <div class="bg-green-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" :style="{ width: `${GetPercent(battery.maxCapacity, battery.capacity)}%` }"> {{GetPercent(battery.maxCapacity, battery.capacity)}}%</div>
             </div>
-        </div>
-        <div class="">
-            <span>Status: {{ battery.status }}</span>
         </div>
       </div>
       <div>
-        <Button class="w-20">Book</Button>
+        <Button class="w-full">Book</Button>
       </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps} from 'vue';
 import Button from '@/components/Button.vue';
+import { type IBatteryInitial } from '@/models/Battery.js'
+import GetBatteryState from '@/utils/GetBatteryState.js'
+import GetPercent from '@/utils/GetPercent.ts'
 
-const props = defineProps({
-    battery: {
-        type: Object,
-        required: true,
-    },
-    index: {
-        type: Number,
-        required: true,
-  },
-});
-console.log(props.battery);
+const props = defineProps<{
+  battery: IBatteryInitial
+}>();
 </script>
