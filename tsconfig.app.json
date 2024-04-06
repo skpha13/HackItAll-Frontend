@@ -11,7 +11,9 @@
               "src/models/Battery.ts",
               "src/utils/*.ts",
               "src/utils/*.ts",
-              "src/utils/**/*.ts"
+              "src/utils/**/*.ts",
+              "formkit.config.ts",
+              "formkit.theme.ts",
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
