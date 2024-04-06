@@ -1,16 +1,28 @@
 <template>
-    <ul class="max-w-xs p-8" v-if="batteryList2.length > 0">
-      <Battery class="mb-4"
+  <div class="p-2 rounded border-2 flex flex-col justify-center items-center">
+    <h2 class="text-center font-semibold text-xl">{{name}}</h2>
+    <ul class="w-full p-4 min-w-80" v-if="batteryList2.length > 0">
+      <Battery class="mb-2 p-4 " 
         v-for="(battery, index) in batteryList2"
         :battery="battery"
         :index="index"/>
     </ul>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import Battery from '@/components/Battery.vue';
-
+import { defineProps, ref } from 'vue';
+const props = defineProps({
+    name: {
+        type: String,
+        required: true,
+    },
+    batteryList: {
+        type: Array,
+        required: true,
+    },
+});
 const batteryList2 = ref([
   {
     model: 'Lithium-Ion',
@@ -31,23 +43,7 @@ const batteryList2 = ref([
     status: 'Charging',
   },
 ]);
-const batteryList = ref([]);
-const fetchBatteryList = async () => {
-  try {
-    const response = await fetch('YOUR_BACKEND_API_URL_HERE');
-    if (!response.ok) {
-      throw new Error('Failed to fetch battery list');
-    }
-    const data = await response.json();
-    batteryList.value = data.batteries || [];
-  } catch (error) {
-    console.error('Error fetching battery list:', error.message);
-  }
-};
-fetchBatteryList();
+const name = "Station 1";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
 
