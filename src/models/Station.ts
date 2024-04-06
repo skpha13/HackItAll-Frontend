@@ -7,7 +7,7 @@ export class StationModel extends Generic {
 
 export interface IBattery {
     id: string,
-    modelDto: {
+    model: {
         id: string,
         name: string
     }
