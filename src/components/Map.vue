@@ -4,8 +4,10 @@
 
 <script setup>
 import {ref, onMounted, watch} from 'vue';
-import L, {map} from 'leaflet';
+import L, {map, marker} from 'leaflet';
 import {store} from "@/utils/store.ts";
+import icon1 from "../assets/location-dot-solid.svg"
+import icon2 from "../assets/location-pin-solid.svg"
 
 const defaultCoords = [44.4268, 26.1025];
 const defaultZoom = 5.5;
@@ -41,14 +43,42 @@ const getCurrentPosition = async () => {
   }
 };
 
+const handleMarkerHover = (event) => {
+  const marker = event.target;
+  marker.setIcon(highlightedIcon);
+}
+
+const handleMarkerHoverEnd = (event) => {
+  const marker = event.target;
+  marker.setIcon(defaultIcon);
+}
+
+const defaultIcon = L.icon({
+  iconUrl: icon1,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+});
+
+const highlightedIcon = L.icon({
+  iconUrl: icon2,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+});
+
 watch(store, (newValue) => {
   if (newValue) {
     const map = mapRef.value;
 
     store.stations.forEach(station => {
-      var latitude = station.coordinateX;
-      var longitude = station.coordinateY;
-      L.marker([latitude, longitude]).addTo(map);
+      const marker = L.marker([station.coordinateX, station.coordinateY])
+                      .addTo(map)
+                      .bindPopup(station.address)
+                      .openPopup();
+      marker.setIcon(defaultIcon);
+      marker.on('mouseover', handleMarkerHover);
+      marker.on('mouseout', handleMarkerHoverEnd);
     })
   }
 });
