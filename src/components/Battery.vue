@@ -17,13 +17,13 @@
         </div>
       </div>
       <div>
-        <Button class="w-full">Book</Button>
+        <Button class="w-full" @click="handleBookClick">Book</Button>
       </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps} from 'vue';
+import { defineProps, defineEmits} from 'vue';
 import Button from '@/components/Button.vue';
 import { type IBatteryInitial } from '@/models/Battery.js'
 import GetBatteryState from '@/utils/GetBatteryState.js'
@@ -32,4 +32,11 @@ import GetPercent from '@/utils/GetPercent.ts'
 const props = defineProps<{
   battery: IBatteryInitial
 }>();
+const emit = defineEmits<{
+  (e: 'openModal', id: String): void
+}>();
+const handleBookClick = () => {
+  console.log('Button clicked');
+    emit('openModal', props.battery.model.id);
+};
 </script>

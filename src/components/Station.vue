@@ -5,12 +5,13 @@
       <Battery class="mb-2 p-4 " 
         v-for="(battery, index) in batteryList"
         :battery="battery"
-        :index="index"/>
+        :index="index"
+        @openModal = "id => openModal(id)"/>
     </ul>
   </div>
 </template>
 
-<script setup>
+<script setup lang = "ts">
 import Battery from '@/components/Battery.vue';
 import { defineProps, ref } from 'vue';
 const props = defineProps({
@@ -23,6 +24,15 @@ const props = defineProps({
         required: true,
     },
 });
+const modalOpen = ref(false);
+const openModal = (id) => {
+  console.log("normal");
+  console.log(id);
+  modalOpen.value = true; 
+}
+const closeModal = () => {
+  modalOpen.value = false;
+};
 </script>
 
 
