@@ -10,12 +10,11 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: 'clicked-battery'): void
+  (e: 'clicked-battery', id: string): void
 }>();
 
 const handleBookClick = () => {
-  console.log(props.battery.model.id);
-  emits('clicked-battery');
+  emits('clicked-battery', props.battery.model.id);
 }
 </script>
 

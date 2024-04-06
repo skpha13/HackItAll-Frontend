@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import L from 'leaflet';
+import {ref, onMounted, watch} from 'vue';
+import L, {map} from 'leaflet';
+import {store} from "@/utils/store.ts";
 
 const defaultCoords = [44.4268, 26.1025];
 const defaultZoom = 5.5;
@@ -40,11 +41,20 @@ const getCurrentPosition = async () => {
   }
 };
 
+watch(store, (newValue) => {
+  if (newValue) {
+    const map = mapRef.value;
+
+    store.stations.forEach(station => {
+      var latitude = station.coordinateX;
+      var longitude = station.coordinateY;
+      L.marker([latitude, longitude]).addTo(map);
+    })
+  }
+});
+
 onMounted(() => {
   initializeMap();
   getCurrentPosition();
 });
 </script>
-
-<style>
-</style>
