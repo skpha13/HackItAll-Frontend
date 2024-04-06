@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import {ref} from "vue";
 
 const props = defineProps<{
-  carBrands: Array<string>
+  buttonLabel: string,
+  carBrands: string[]
 }>();
 
 const emit = defineEmits<{
-  (e: 'hasChosenBrand'): void
+  (e: 'hasChosenBrand', carBrand: string): void
 }>();
+
+const selectedItem = ref(props.buttonLabel);
+const buttonClicked = (brand: string) => {
+  selectedItem.value = brand;
+  emit('hasChosenBrand', brand);
+}
 </script>
 
 <template>
     <Menu as="div" class="relative inline-block text-left">
       <div>
         <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          Car Brand
+          {{ selectedItem }}
           <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
         </MenuButton>
       </div>
@@ -25,7 +33,8 @@ const emit = defineEmits<{
           <div class="py-1">
             <MenuItem v-for="brand in props.carBrands"
                       v-slot=" { active }">
-              <a @click="emit('hasChosenBrand')" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">{{ brand }}</a>
+              <a @click="buttonClicked(brand)"
+                 :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">{{ brand }}</a>
             </MenuItem>
           </div>
         </MenuItems>
