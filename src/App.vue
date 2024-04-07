@@ -84,14 +84,14 @@ import router from "@/router";
                          class="hover:cursor-pointer text-xl text-purple-500 hover:bg-purple-100 hover:rounded-lg p-2"
       />
     </div>
-
-    <font-awesome-icon @click="redirectToUser"
-                       icon="fa-regular fa-circle-user"
-                       class="hover:cursor-pointer text-3xl text-purple-500"/>
-    
+    <div>  
     <RouterLink to="/tags" class="text-xl text-purple-500 hover:bg-purple-100 hover:rounded-lg p-2">
       <font-awesome-icon icon="fa-solid fa-tags" />
     </RouterLink>
+    <font-awesome-icon @click="redirectToUser"
+                       icon="fa-regular fa-circle-user"
+                       class="hover:cursor-pointer text-3xl text-purple-500"/>
+  </div>
   </div>
 
   <RouterView />
