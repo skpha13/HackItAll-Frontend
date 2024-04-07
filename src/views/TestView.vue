@@ -1,10 +1,10 @@
 <script setup>
-import Station from '@/components/Station.vue';
+import PricingPlans from '@/components/PricingPlans.vue';
 </script>
 
 <template>
     <div id="app">
-      <Station />
+      <PricingPlans />
     </div>
 </template>
 
