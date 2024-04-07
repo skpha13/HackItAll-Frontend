@@ -73,9 +73,9 @@ watch(store, (newValue) => {
 
     store.stations.forEach(station => {
       const marker = L.marker([station.coordinateX, station.coordinateY])
+                      .bindTooltip(station.address)
+                      .openTooltip()
                       .addTo(map)
-                      .bindPopup(station.address)
-                      .openPopup();
       marker.setIcon(defaultIcon);
       marker.on('mouseover', handleMarkerHover);
       marker.on('mouseout', handleMarkerHoverEnd);
