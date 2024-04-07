@@ -7,9 +7,9 @@ import { plugin, defaultConfig } from '@formkit/vue'
 import config from '../formkit.config'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faXmark, faTags} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMagnifyingGlass, faXmark)
+library.add(faMagnifyingGlass, faXmark, faTags)
 
 const app = createApp(App)
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, RouterLink } from 'vue-router'
 import DropdownCarBrand from "@/components/DropdownCarBrand.vue";
 import {ref} from "vue";
 import {Car} from "@/models/Car";
@@ -70,6 +70,9 @@ import {StationModel} from "@/models/Station";
                        icon="fa-solid fa-magnifying-glass"
                        class="text-xl text-purple-500 hover:bg-purple-100 hover:rounded-lg p-2"
     />
+    <RouterLink to="/tags" class="text-xl text-purple-500 hover:bg-purple-100 hover:rounded-lg p-2">
+      <font-awesome-icon icon="fa-solid fa-tags" />
+    </RouterLink>
   </div>
 
   <RouterView />
